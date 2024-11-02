@@ -62,10 +62,8 @@ class MarsViewModel(private val marsPhotosRepository: MarsPhotosRepository) : Vi
             marsUiState = MarsUiState.Loading
             marsUiState = try {
 
-                val listResult = marsPhotosRepository.getMarsPhotos()
-                MarsUiState.Success(
-                    "Success: ${listResult.size} Mars photos retrieved"
-                )
+                val result = marsPhotosRepository.getMarsPhotos()[0]
+                MarsUiState.Success("First Mars imageURL: ${result.imgSrc}")
             } catch (e: IOException) {
                 MarsUiState.Error
             } catch (e: HttpException) {
